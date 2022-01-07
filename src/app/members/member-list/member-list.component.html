@@ -1,0 +1,51 @@
+<p>member-list works!</p>
+<div class="text-center mt-3">
+    <h2>Your Possible Buddies - {{pagination?.totalItems}} found</h2>
+</div>
+<div class="container mt-3">
+    <form #form="ngForm" class="form-inline mb-3" (ngSubmit)="loadMembers()" autocomplete="off">
+        <div class="form-group">
+            <label>Age from: </label>
+            <input type="number" class="form-control ml-1" style="width: 70px;" name="minAge"
+            [(ngModel)]="minAge">
+        </div>
+        <div class="form-group px-2">
+            <label>Age from: </label>
+            <input type="number" class="form-control ml-1" style="width: 70px;" name="maxAge"
+            [(ngModel)]="maxAge">
+        </div>
+        <div class="form-group px-2">
+            <label>Show: </label>
+            <select name="gender" style="width: 150px" class="form-control ml-1">
+                <option *ngFor="let gender of genderList" [value]="gender.value">
+                    {{gender.display}}
+                </option>
+            </select>
+        </div>
+        <button class="btn btn-primary ml-1" type="submit">Filter</button>
+        <button (click)="resetFilters()" class="btn btn-info ml-1" type="submit">Reset</button>
+
+        <div class="btn-group float-right">
+            <button class="btn btn-primary" name="orderBy" (click)="loadMembers()" btnRadio="lastActive"
+            [(ngModel)]="OrderBy" type="button">Last Active</button>
+        </div>
+        <div class="btn-group float-right">
+            <button class="btn btn-primary" name="orderBy" (click)="loadMembers()" btnRadio="created"
+            [(ngModel)]="OrderBy" type="button">Newly Joined</button>
+        </div>
+    </form>
+</div>
+<div class="class row">
+    <div *ngFor="let member of members" class="class col-2">
+        <app-member-card [member]="member"></app-member-card>
+    </div>
+</div>
+<div class="d-flex justify-content-center" *ngIf="pagination">
+    
+    <pagination 
+    [totalItems]="30"
+    [itemsPerPage]="pagination.itemsPerPage"
+    [(ngModel)]="pagination.currentPage"
+    (pageChanged)="pageChanged($event)">
+    </pagination>
+</div>

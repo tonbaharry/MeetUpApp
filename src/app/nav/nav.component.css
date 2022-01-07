@@ -1,0 +1,13 @@
+.navbar-custom {
+    background-color: grey;
+}
+
+.dropdown-toggle, .dropdown-item{
+    cursor: pointer;
+}
+
+.img {
+    max-height:   20px;
+    border: 2px solid white;
+    display: inline;
+}
